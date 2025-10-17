@@ -1,42 +1,34 @@
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 8);
-    };
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <nav
-      id="nav"
-      className={`fixed top-0 left-0 w-full z-50 transition-colors backdrop-blur-md ${
-        scrolled ? "bg-white/70 shadow-sm" : "bg-white/30"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center space-x-6">
-          <img
-            src="/logo-rocket.svg"
-            alt="Logo Mon Cheval Protégé"
-            className="h-8 w-auto"
-          />
-          <div className="hidden md:flex space-x-6 text-sm font-medium text-textDark">
-            <a href="#features" className="hover:text-primary">Fonctionnalités</a>
-            <a href="#how" className="hover:text-primary">Comment ça marche</a>
-            <a href="#testimonials" className="hover:text-primary">Témoignages</a>
-            <a href="#faq" className="hover:text-primary">FAQ</a>
-          </div>
-        </div>
-        <button className="rounded-full border border-primary/12 bg-white/50 backdrop-blur-md px-5 py-2.5 text-textDark shadow-sm hover:bg-white/70 transition">
-          ✉︎ Obtenir un devis
-        </button>
-      </div>
-    </nav>
+    <header className={`sticky top-0 z-50 transition-all ${scrolled ? "bg-white/70 backdrop-blur-lg shadow-sm" : "bg-white/30 backdrop-blur-md"} border-b border-primary/10`}>
+      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <Link href="#" className="flex items-center gap-2">
+          <span className="h-6 w-6 rounded-full bg-gradient-to-tr from-primary to-primary2 shadow-glow inline-flex items-center justify-center">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M3 21l9-18 9 18-9-4z"/></svg>
+          </span>
+          <span className="font-semibold text-ink">Flowline</span>
+        </Link>
+
+        <ul className="hidden md:flex items-center gap-7 text-body">
+          <li><a href="#features" className="hover:text-ink">Features</a></li>
+          <li><a href="#work" className="hover:text-ink">How it works</a></li>
+          <li><a href="#testimonials" className="hover:text-ink">Testimonials</a></li>
+          <li><a href="#faq" className="hover:text-ink">FAQ</a></li>
+        </ul>
+
+        <a href="#demo" className="btn-secondary border-primary/20 bg-white/70">✉︎ Launch with Flowline</a>
+      </nav>
+    </header>
   );
 }
