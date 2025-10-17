@@ -1,7 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-pageBg text-textDark;
+:root {
+  --radius: 1.25rem;
 }
+
+html, body, #__next { height: 100%; }
+body {
+  @apply bg-page text-ink antialiased;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+/* glass */
+.glass {
+  @apply bg-white/60 backdrop-blur-xl border border-primary/10 shadow-sm;
+}
+
+/* gradient primary */
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold text-white shadow-glow transition-transform;
+  background-image: linear-gradient(90deg, #8B5CF6 0%, #A78BFA 100%);
+}
+.btn-primary:hover { transform: translateY(-1px); }
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold text-ink bg-white shadow-sm border border-primary/10;
+}
+
+/* gradient border utility */
+.gradient-border {
+  position: relative;
+  border-radius: var(--radius);
+}
+.gradient-border::before {
+  content: "";
+  position: absolute; inset: 0;
+  padding: 1px; border-radius: inherit;
+  background: linear-gradient(90deg,#8B5CF6,#A78BFA);
+  -webkit-mask: 
+    linear-gradient(#000 0 0) content-box, 
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* halos */
+.halo { @apply absolute rounded-full blur-3xl; }
