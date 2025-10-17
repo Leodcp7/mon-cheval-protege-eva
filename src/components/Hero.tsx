@@ -1,42 +1,51 @@
-import { FadeUp } from "./animations";
+import { motion } from "framer-motion";
+import { fadeUp, stagger } from "./motion";
 
 export default function Hero() {
   return (
-    <section className="relative pt-32 pb-20 overflow-hidden">
-      {/* Halo en fond */}
-      <div className="absolute -top-24 right-0 w-[40vw] h-[40vw] pointer-events-none bg-gradient-to-tr from-primary/30 via-transparent to-transparent blur-3xl rounded-full" />
-      <div className="absolute -bottom-40 -left-20 w-[50vw] h-[50vw] pointer-events-none bg-gradient-to-tr from-primaryLight/25 via-transparent to-transparent blur-3xl rounded-full" />
+    <section className="relative overflow-hidden">
+      {/* halos */}
+      <div className="halo -top-32 -right-20 h-80 w-80 bg-primary/30"></div>
+      <div className="halo -bottom-24 -left-20 h-96 w-96 bg-primary2/25"></div>
 
-      <div className="max-w-4xl mx-auto px-6 text-center md:text-left">
-        <FadeUp>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-tight">
-            Protégez votre cheval<br />sans vous compliquer la vie
-          </h1>
-        </FadeUp>
-        <FadeUp delay={0.2}>
-          <p className="mt-6 text-lg md:text-xl text-muted">
-            Cavaliers et assureurs, nous mettons notre passion et notre expérience à votre service.
-          </p>
-        </FadeUp>
-        <FadeUp delay={0.4}>
-          <div className="mt-8 flex flex-col sm:flex-row sm:space-x-4 gap-4 justify-center md:justify-start">
-            <button className="rounded-full border border-primary/12 bg-white/50 backdrop-blur-md px-5 py-2.5 text-textDark shadow-sm hover:bg-white/70 transition">
-              En savoir plus
-            </button>
-            <button className="relative rounded-full px-6 py-3 font-medium text-white bg-gradient-to-r from-primary to-primaryLight shadow-[0_8px_20px_rgba(139,92,246,0.35)] hover:brightness-105 transition">
-              <span>Obtenir un devis</span>
-              <span className="ml-2">→</span>
-              <span className="absolute -inset-0.5 -z-10 rounded-full bg-gradient-to-r from-primary/30 to-primaryLight/20 blur-xl" />
-            </button>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
+        <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <motion.p variants={fadeUp(0)} className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-primary/10 text-primary font-medium mb-5">FRAMER-STYLE LANDING</motion.p>
+            <motion.h1 variants={fadeUp(0.05)} className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight text-ink">
+              Boost your productivity<br/> <span className="bg-gradient-to-r from-primary to-primary2 bg-clip-text text-transparent">without the overwhelm.</span>
+            </motion.h1>
+            <motion.p variants={fadeUp(0.1)} className="mt-6 text-lg text-body max-w-xl">
+              Automate workflows, get real-time insights, et connecte tous tes outils — sans complexité. Design premium, perf, accessibilité AA.
+            </motion.p>
+
+            <motion.div variants={fadeUp(0.15)} className="mt-8 flex flex-col sm:flex-row items-center gap-4">
+              <a href="#demo" className="btn-primary">Experience Effortless Efficiency →</a>
+              <a href="#work" className="btn-secondary">Learn how</a>
+            </motion.div>
+
+            <motion.ul variants={fadeUp(0.2)} className="mt-6 flex flex-wrap items-center gap-3 text-sm text-muted">
+              <li className="glass px-3 py-1 rounded-full">⚡ Quick setup</li>
+              <li className="glass px-3 py-1 rounded-full">🛡 GDPR compliant</li>
+              <li className="glass px-3 py-1 rounded-full">✅ ISO27001</li>
+            </motion.ul>
           </div>
-        </FadeUp>
-        <FadeUp delay={0.6}>
-          <div className="mt-10 flex justify-center md:justify-start space-x-4 text-xs text-muted">
-            {["Quick setup", "GDPR compliant", "ISO27001"].map((badge) => (
-              <span key={badge} className="px-3 py-1 bg-white/60 rounded-full">{badge}</span>
-            ))}
-          </div>
-        </FadeUp>
+
+          {/* right visual */}
+          <motion.div variants={fadeUp(0.08)} className="relative">
+            <div className="gradient-border glass p-6 rounded-3xl">
+              <div className="text-sm text-body mb-3">Résumé — estimation instantanée</div>
+              <div className="h-56 rounded-2xl bg-gradient-to-br from-white to-white/40 border border-primary/10 flex items-center justify-center">
+                <div className="w-full max-w-md px-6">
+                  <div className="h-2 rounded-full bg-primary/20 w-3/4 mb-3"></div>
+                  <div className="h-2 rounded-full bg-primary/10 w-2/3 mb-8"></div>
+                  <div className="h-24 rounded-xl bg-gradient-to-r from-primary/20 to-primary2/20 shadow-inner"></div>
+                </div>
+              </div>
+            </div>
+            <div className="absolute -z-10 inset-0 translate-x-6 translate-y-6 rounded-3xl bg-primary/20 blur-3xl opacity-50"></div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
